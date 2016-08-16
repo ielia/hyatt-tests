@@ -1,6 +1,13 @@
+var blackhole = "PROXY 255.255.255.0:3421";
+// Safari/MacOS needs the old value
+if (typeof(navigator) != "undefined"
+	&& navigator.appVersion.indexOf("Mac") != -1) {
+    blackhole = "PROXY 0.0.0.0:3421";
+}
+
 function FindProxyForURL(url, host) {
     if (shExpMatch(host, "assets-d.hyatt.com"))
-        "PROXY 4.5.6.7:8080; PROXY 7.8.9.10:8080";
+        return blackhole;
 
     return "DIRECT";
 }
